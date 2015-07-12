@@ -7,7 +7,8 @@ systems like Git, Mercurial, or Subversion.
 
 **Quick Install**:
 ```bash
-curl https://raw.githubusercontent.com/hatzopoulos/wtf/entropy/wtf.py > ~/bin/wtf.py && chmod 0755 !#:3
+curl https://raw.githubusercontent.com/hatzopoulos/wtf/entropy/wtf.py > \
+~/bin/wtf.py && chmod 0755 !#:3
 ```
 
 How to use it ([see below](#options) for options to control exactly which
