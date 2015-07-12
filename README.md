@@ -6,7 +6,7 @@ text files, so that they don't clog up your commits to version control
 systems like Git, Mercurial, or Subversion.
 
 **Quick Install**:  
-`curl https://raw.githubusercontent.com/hatzopoulos/wtf/master/wtf.py > ~/bin/wtf.py && chmod 0755 !#:3`
+`curl https://raw.githubusercontent.com/hatzopoulos/wtf/entropy/wtf.py > ~/bin/wtf.py && chmod 0755 !#:3`
 
 How to use it ([see below](#options) for options to control exactly which
 whitespace issues it fixes):
