@@ -5,14 +5,17 @@ Identifies and/or fixes inconsistent whitespace and line endings in
 text files, so that they don't clog up your commits to version control
 systems like Git, Mercurial, or Subversion.
 
-**Quick Install**:
+### Quick Install:
+
 ```bash
 curl https://raw.githubusercontent.com/hatzopoulos/wtf/entropy/wtf.py > \
 ~/bin/wtf.py && chmod 0755 !#:3
 ```
 
-How to use it ([see below](#options) for options to control exactly which
-whitespace issues it fixes):
+### How to use it:
+
+[see below](#options) for options to control exactly which
+whitespace issues it fixes:
 
 ```bash
 # consistent whitespace from programs that generate text files
@@ -42,7 +45,7 @@ elif (( $? == 20 )); then
 fi
 ```
 
-Why you should use it:
+### Why you should use it:
 
 * It's like an incomprehensible shell-script one-liner (e.g. `sed -e 's/LINENOISE/'`), but way better
 * It's similar to [`git
@@ -50,6 +53,7 @@ Why you should use it:
   but more flexible and detailed.
 * `wtf.py` is a simple Python2 script (tested with 2.7.5) with *no
   dependencies beyond the standard Python library*.
+* it combines the best features from expand/unexpand
 
 Exciting origin story
 ---------------------
