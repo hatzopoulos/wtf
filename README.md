@@ -8,8 +8,7 @@ systems like Git, Mercurial, or Subversion.
 ### Quick Install:
 
 ```bash
-curl https://raw.githubusercontent.com/hatzopoulos/wtf/entropy/wtf.py > \
-~/bin/wtf.py && chmod 0755 !#:3
+curl https://raw.githubusercontent.com/hatzopoulos/wtf/entropy/wtf.py > ~/bin/wtf.py && chmod 0755 !#:3
 
 # optional symlink alias
 ln -s ~/bin/wtf.py ~/bin/wtf
