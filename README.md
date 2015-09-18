@@ -5,19 +5,28 @@ Identifies and/or fixes inconsistent whitespace and line endings in
 text files, so that they don't clog up your commits to version control
 systems like Git, Mercurial, or Subversion.
 
-### Quick Install:
+### Why you should use it:
 
+* It's like an incomprehensible shell-script one-liner (e.g. `sed -e 's/LINENOISE/'`), but way better
+* It's similar to [`git
+  stripspace`](https://www.kernel.org/pub/software/scm/git/docs/git-stripspace.html),
+  but more flexible and detailed.
+* `wtf.py` is a simple Python2 script (tested with 2.7.5) with *no
+  dependencies beyond the standard Python library*.
+
+
+### Quick Install
 ```bash
-curl https://raw.githubusercontent.com/hatzopoulos/wtf/entropy/wtf.py > ~/bin/wtf.py && chmod 0755 !#:3
+curl https://raw.githubusercontent.com/hatzopoulos/wtf/entropy/wtf.py ~/bin/wtf.py && chmod 0755 !#:3
 
 # optional symlink alias
 ln -s ~/bin/wtf.py ~/bin/wtf
 ```
 
-### How to use it:
+### How to use it
 
-[see below](#options) for options to control exactly which
-whitespace issues it fixes:
+[See below](#whitespace-issues-addressed) for options to control exactly which
+whitespace issues it fixes, but here are some examples:
 
 ```bash
 # consistent whitespace from programs that generate text files
@@ -47,16 +56,6 @@ elif (( $? == 20 )); then
 fi
 ```
 
-### Why you should use it:
-
-* It's like an incomprehensible shell-script one-liner (e.g. `sed -e 's/LINENOISE/'`), but way better
-* It's similar to [`git
-  stripspace`](https://www.kernel.org/pub/software/scm/git/docs/git-stripspace.html),
-  but more flexible and detailed.
-* `wtf.py` is a simple Python2 script (tested with 2.7.5) with *no
-  dependencies beyond the standard Python library*.
-* it combines the best features from expand/unexpand
-
 Exciting origin story
 ---------------------
 
@@ -67,7 +66,7 @@ tools on multiple platforms.
 That evening, I went home and spent way too much time writing this
 program instead!
 
-<a name="options"/>Whitespace issues addressed
+Whitespace issues addressed
 ----------------------------------------------
 
 WTF currently fixes, or simply reports, a few common types of whitespace
@@ -96,15 +95,12 @@ enabling the user to fix, report, or ignore the issue.
   mixing of lf/crlf). Default is to **fix** non-matching EOL
   characters by making them all the same as the first line of the
   file. The desired EOL markers can also be set to a specific value
-  (lf/crlf/native), in which case all lines will unconditionally
-  receive this marker. Additionally `--expect-eol` can be used to
-  report line endings not matching the value set (lf/crlf/native).
+  (`lf`/`crlf`/`native`), in which case all lines will unconditionally
+  receive this marker.
 
-        -m, --match-eol
-        -M, --report-match-eol
-        -Im, --ignore-match-eol
         -E ENDING, --coerce-eol ENDING
-        --expect-eol ENDING
+        -e ENDING, --expect-eol ENDING
+        -Ie, --ignore-eol
 
 * Check for spaces followed by tabs in the whitespace at the beginning
   of a line; fixing this condition requires setting either
