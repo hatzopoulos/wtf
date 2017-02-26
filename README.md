@@ -2,6 +2,9 @@
     * [Why you should use it](#why-you-should-use-it)
     * [Quick Install](#quick-install)
     * [How to use it](#how-to-use-it)
+    * [Git `pre-commit` hooks](#git-pre-commit-hooks)
+      * [Careful version](#careful-version)
+      * [Simple version](#simple-version)
   * [Exciting origin story](#exciting-origin-story)
   * [Whitespace issues addressed](#whitespace-issues-addressed)
   * [Reporting](#reporting)
@@ -66,6 +69,53 @@ if (( $? == 10 )); then
 elif (( $? == 20 )); then
   echo "unfixed issues!"
 fi
+```
+
+Git `pre-commit` hooks
+----------------------
+
+You can use [Git `pre-commit` hooks](https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks)
+to automatically run `wtf` and cleanup whitespace in your repository
+prior to every commit.
+(You can bypass the hook, however, with `git commit -n`.)
+
+Create the file `.git/hooks/pre-commit` in your repository, and ensure that it is executable
+(`chmod +x .git/hooks/pre-commit`).
+
+### Careful version
+
+This version only modifies your commits, and does not touch Git's
+working tree.  If you understand and use Git's index ("staging area"),
+you should use this version. It will play nicely with `git add --patch`.
+
+Note that when a file changes in your commit but remains unchanged in your working tree, the file will be marked `modified` by `git status` immediately after the commit.
+
+[This version](https://github.com/dlenski/wtf/blob/HEAD/pre-commit.careful)
+will run `wtf`, with the default options, on all the to-be-committed
+text files.
+
+### Simple version
+
+This version modifies Git's working tree as well as your commits. **This version will not play nicely with
+`git add --patch`.**
+
+This version will run `wtf -i`, with any other options you add to `wtf_options`, on all the
+to-be-committed text files. They will be cleaned up in the commit, as
+well as in your working tree.
+
+```bash
+#!/bin/sh
+wtf_options=''
+
+# get a list of to-be-committed filepaths, EXCLUDING files considered
+# by Git to be binary
+committees=$(git diff --cached --numstat --diff-filter=ACMRTU|egrep -v ^-|cut -f3-)
+
+# Run Whitespace Total Fixer in-place, and re-add files modified by it
+for committee in $committees
+do
+	wtf -i $wtf_options "$committee" || git add "$committee"
+done
 ```
 
 Exciting origin story
@@ -179,7 +229,7 @@ Anything else?
 
 Author
 ------
-&copy; Daniel Lenski <<dlenski@gmail.com>> (2014-2015)
+&copy; Daniel Lenski <<dlenski@gmail.com>> (2014-2016)
 
 License
 -------
